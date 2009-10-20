@@ -74,7 +74,22 @@ class Action(FiftyStatesApiObject):
 
     def __str__(self):
         return '%s: %s' % (self.actor, self.action)
+
+class Session(FiftyStatesApiObject):
+    pass
     
+class State(FiftyStatesApiObject):
+
+    @staticmethod
+    def get(abbrev):
+        obj = apicall(abbrev)
+        return State(obj)
+
+    def get_sessions(self):
+        func = '%s/sessions' % self.abbreviation
+        obj = apicall(func)
+        return map(Session, obj)
+
 class Bill(FiftyStatesApiObject):
 
     @staticmethod
