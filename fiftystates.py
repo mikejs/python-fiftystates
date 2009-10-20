@@ -9,7 +9,8 @@ class FiftyStatesApiError(Exception):
     pass
     
 def apicall(func, params={}):
-    url = 'http://174.129.25.59/api/%s/%s' % (func,
+    params['format'] = 'json'
+    url = 'http://174.129.25.59/api/%s/?%s' % (func,
                                               urllib.urlencode(params))
     try:
         response = urllib2.urlopen(url).read()
@@ -41,6 +42,12 @@ class Legislator(FiftyStatesApiObject):
         func = 'legislator/%d' % id
         obj = apicall(func)
         return Legislator(obj)
+
+    @staticmethod
+    def search(**kwargs):
+        func = 'legislator/search'
+        obj = apicall(func, kwargs)
+        return map(Legislator, obj)
 
     def __init__(self, obj):
         self.__dict__.update(obj)
