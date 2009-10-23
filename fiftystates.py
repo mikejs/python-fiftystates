@@ -97,6 +97,9 @@ class State(FiftyStatesApiObject):
         obj = apicall(func)
         return map(Session, obj)
 
+    def __str__(self):
+        return self.name
+
 class Bill(FiftyStatesApiObject):
 
     @staticmethod
