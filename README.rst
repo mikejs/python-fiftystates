@@ -13,7 +13,7 @@ Some examples:
     California
     >>> print ca.lower_chamber_name
     Assembly
-    >>> for session in ca.get_sessions():
+    >>> for session in ca.sessions:
     ...     print session.name
     20092010
     20092010 Special Session 1

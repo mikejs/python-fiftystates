@@ -83,7 +83,9 @@ class Action(FiftyStatesApiObject):
         return '%s: %s' % (self.actor, self.action)
 
 class Session(FiftyStatesApiObject):
-    pass
+
+    def __str__(self):
+        return self.name
     
 class State(FiftyStatesApiObject):
 
@@ -92,10 +94,9 @@ class State(FiftyStatesApiObject):
         obj = apicall(abbrev)
         return State(obj)
 
-    def get_sessions(self):
-        func = '%s/sessions' % self.abbreviation
-        obj = apicall(func)
-        return map(Session, obj)
+    def __init__(self, obj):
+        super(State, self).__init__(obj)
+        self.sessions = map(Session, self.sessions)
 
     def __str__(self):
         return self.name
