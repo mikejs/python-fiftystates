@@ -2,8 +2,33 @@
 python-fiftystates
 ==================
 
-Examples
-========
+Python library for interacting with the Fifty State Project API.
+
+The Fifty State Project provides data on state legislative activities,
+including bill summaries, votes, sponsorships and state legislator
+information.
+
+python-fiftystates is a project of Sunlight Labs (c) 2009.
+Written by Michael Stephens <mstephens@sunlightfoundation.com>.
+
+Source: http://github.com/sunlightlabs/python-fiftystates
+
+Requirements
+============
+
+python >= 2.4
+
+simplejson >= 1.8 (will use builtin json module instead on python >= 2.6)
+
+Installation
+============
+
+To install run
+
+    ``python setup.py install``
+
+Usage
+=====
 
 Some examples:
 

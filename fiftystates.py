@@ -1,3 +1,15 @@
+"""Python library for interacting with the Fifty State Project API.
+
+The Fifty State Project provides data on state legislative activities,
+including bill summaries, votes, sponsorships and state legislator
+information.
+"""
+
+__author__ = "Michael Stephens <mstephens@sunlightfoundation.com>"
+__copyright__ = "Copyright (c) 2009 Sunlight Labs"
+__license__ = "BSD"
+__version__ = "0.1"
+
 import urllib, urllib2
 import datetime
 try:
@@ -57,10 +69,24 @@ class Legislator(FiftyStatesApiObject):
         return self.full_name
 
 class Vote(FiftyStatesApiObject):
+
+    class SpecificVote(FiftyStatesApiObject):
+
+        def __str__(self):
+            return "%s voted %s" % (self.full_name, self.type)
     
     def __init__(self, obj):
         super(Vote, self).__init__(obj)
         self.date = parse_date(self.date)
+
+        if 'roll' in obj:
+            self.roll = map(self.SpecificVote, self.roll)
+
+    @staticmethod
+    def get(id):
+        func = 'vote/%d' % id
+        obj = apicall(func)
+        return Vote(obj)
 
     def __str__(self):
         return "Vote on '%s'" % self.motion
